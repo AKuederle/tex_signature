@@ -6,10 +6,41 @@
 %% of the LaTeX Project Public License Distributed from CTAN archives
 %% in directory macros/latex/base/lppl.txt.
 % 
-\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+\NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{mysignature}
   [2015/05/17 v0.01 LaTeX package to create a signature]
 
+\RequirePackage{kvoptions} % allow key value options
+
+\DeclareStringOption[default_signature]{signature} % select which signature-option-file should be used
+\DeclareStringOption[\today]{date}[\@date] % select which date should be used as Sign date (not specified: today, specified without value: the \date used in the document)
+\DeclareBoolOption{nolocation} % add the option to remove the location
+\DeclareBoolOption{noposition} % add the option to remove the position
+
+
+\ProcessKeyvalOptions*
+
+\def\SigDate{\mysignature@date} % assigns the date based on the option
+\input{\mysignature@signature} % loads the respective settings file
+
+% Removes the location based on the option
+\ifmysignature@nolocation
+    \def\SigLocation{}
+\fi
+%%
+
+
+% Removes the position based on the option
+\ifmysignature@noposition
+    \def\SigPosition{}
+\fi
+
+\def\Signature{
+\SigLocation \\
+\SigDate \\
+\SigName \\
+\SigPosition
+}
 
 \endinput
 %%
