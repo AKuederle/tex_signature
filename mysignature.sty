@@ -1,16 +1,19 @@
 % A package, that provide a function to generate a nice looking signature
-% 
+%
 % (c) Arne Küderle
 %
 %% This program can be redistributed and/or modified under the terms
 %% of the LaTeX Project Public License Distributed from CTAN archives
 %% in directory macros/latex/base/lppl.txt.
-% 
+%
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{mysignature}
   [2015/05/17 v0.01 LaTeX package to create a signature]
 
 \RequirePackage{kvoptions} % allow key value options
+\RequirePackage{keyval} % allow key value options for commands
+\RequirePackage{graphicx} % for pictures
+\RequirePackage{xstring} % for string comparison
 
 \DeclareStringOption[default_signature]{signature} % select which signature-option-file should be used
 \DeclareStringOption[\today]{date}[\@date] % select which date should be used as Sign date (not specified: today, specified without value: the \date used in the document)
@@ -25,23 +28,53 @@
 
 % Removes the location based on the option
 \ifmysignature@nolocation
-    \def\SigLocation{}
+    \def\SigTopline{\small\SigDate}
+\else
+    \def\SigTopline{\small\SigLocation, \SigDate}
 \fi
 %%
 
-
 % Removes the job based on the option
 \ifmysignature@nojob
-    \def\Sigjob{}
+    \def\SigJobline{}
+\else
+    \def\SigJobline{\\ \small\SigJob}
 \fi
+%%
 
-\def\Signature{
-\SigLocation \\
-\SigDate \\
-\SigName \\
-\Sigjob
+\newcommand{\mysignature}[1]{
+    \IfStrEqCase{#1}{
+        {full}{
+            \begin{flushright}
+                \begin{minipage}{6cm}
+                    \begin{flushleft}
+                        \SigTopline \\
+                    \end{flushleft}
+                    \vspace*{-0.75cm}
+                    \hspace*{1cm}
+                    \fbox{
+                    \begin{minipage}[t][1.1cm]{5cm}
+                        \hspace*{\SigTransformX}
+                        \vskip\SigTransformY
+                        \includegraphics[height=1.1cm]{\SigSource}
+                    \end{minipage}
+                    }
+                    \vskip-0.3cm
+                    \rule{\textwidth}{0.2pt}
+                    \vspace*{-0.7cm}
+                    \begin{flushright}
+                        \SigName
+                        \SigJobline
+                    \end{flushright}
+                \end{minipage}
+            \end{flushright}
+        }
+        {minimal}{
+        \SigName
+        \SigJob
+        }
+    }
 }
-
 \endinput
 %%
 %% End of file `mysignature.sty'.
