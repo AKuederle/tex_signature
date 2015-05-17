@@ -15,7 +15,7 @@
 \DeclareStringOption[default_signature]{signature} % select which signature-option-file should be used
 \DeclareStringOption[\today]{date}[\@date] % select which date should be used as Sign date (not specified: today, specified without value: the \date used in the document)
 \DeclareBoolOption{nolocation} % add the option to remove the location
-\DeclareBoolOption{noposition} % add the option to remove the position
+\DeclareBoolOption{nojob} % add the option to remove the job
 
 
 \ProcessKeyvalOptions*
@@ -30,16 +30,16 @@
 %%
 
 
-% Removes the position based on the option
-\ifmysignature@noposition
-    \def\SigPosition{}
+% Removes the job based on the option
+\ifmysignature@nojob
+    \def\Sigjob{}
 \fi
 
 \def\Signature{
 \SigLocation \\
 \SigDate \\
 \SigName \\
-\SigPosition
+\Sigjob
 }
 
 \endinput
