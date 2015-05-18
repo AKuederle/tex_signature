@@ -42,38 +42,57 @@
 \fi
 %%
 
-\newcommand{\mysignature}[1]{
+\newcommand{\mysignature}[2][right]{
     \IfStrEqCase{#1}{
+        {left}{\def\Align{flushleft}}
+        {right}{\def\Align{flushright}}
+        {center}{\def\Align{center}}
+    }
+    \begin{\Align}
+    \IfStrEqCase{#2}{
         {full}{
-            \begin{flushright}
-                \begin{minipage}{6cm}
-                    \begin{flushleft}
-                        \SigTopline \\
-                    \end{flushleft}
-                    \vspace*{-0.75cm}
-                    \hspace*{1cm}
-                    \fbox{
-                    \begin{minipage}[t][1.1cm]{5cm}
-                        \hspace*{\SigTransformX}
-                        \vskip\SigTransformY
-                        \includegraphics[height=1.1cm]{\SigSource}
-                    \end{minipage}
-                    }
-                    \vskip-0.3cm
-                    \rule{\textwidth}{0.2pt}
-                    \vspace*{-0.7cm}
-                    \begin{flushright}
-                        \SigName
-                        \SigJobline
-                    \end{flushright}
+            \begin{minipage}{6cm}
+                \begin{flushleft}
+                    \SigTopline \\
+                \end{flushleft}
+                \vspace*{-0.75cm}
+                \hspace*{1cm}
+                \fbox{
+                \begin{minipage}[t][1.1cm]{5cm}
+                    \hspace*{\SigTransformX}
+                    \vskip\SigTransformY
+                    \includegraphics[height=1.1cm]{\SigSource}
                 \end{minipage}
-            \end{flushright}
+                }
+                \vskip-0.3cm
+                \rule{\textwidth}{0.2pt}
+                \vspace*{-0.7cm}
+                \begin{flushright}
+                    \SigName
+                    \SigJobline
+                \end{flushright}
+            \end{minipage}
         }
         {minimal}{
-        \SigName
-        \SigJob
+            \begin{minipage}{5cm}
+                \fbox{
+                \begin{minipage}[t][1.1cm]{4.5cm}
+                    \hspace*{\SigTransformX}
+                    \vskip\SigTransformY
+                    \includegraphics[height=1.1cm]{\SigSource}
+                \end{minipage}
+                }
+                \vskip-0.3cm
+                \makebox[\textwidth]{\dotfill}
+                \vspace*{-0.7cm}
+                \begin{flushright}
+                    \SigName
+                    \SigJobline
+                \end{flushright}
+            \end{minipage}
         }
     }
+    \end{\Align}
 }
 \endinput
 %%
