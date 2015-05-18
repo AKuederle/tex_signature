@@ -19,6 +19,7 @@
 \DeclareStringOption[\today]{date}[\@date] % select which date should be used as Sign date (not specified: today, specified without value: the \date used in the document)
 \DeclareBoolOption{nolocation} % add the option to remove the location
 \DeclareBoolOption{nojob} % add the option to remove the job
+\DeclareBoolOption{empty} % add the option to remove the actual signature
 
 
 \ProcessKeyvalOptions*
@@ -42,6 +43,14 @@
 \fi
 %%
 
+% Removes the actual signature based on the option
+\ifmysignature@empty
+    \def\SigPicture{}
+\else
+    \def\SigPicture{\includegraphics[height=1.1cm]{\SigSource}}
+\fi
+%%
+
 \newcommand{\mysignature}[2][right]{
     \IfStrEqCase{#1}{
         {left}{\def\Align{flushleft}}
@@ -61,7 +70,7 @@
                 \begin{minipage}[t][1.1cm]{5cm}
                     \hspace*{\SigTransformX}
                     \vskip\SigTransformY
-                    \includegraphics[height=1.1cm]{\SigSource}
+                    \SigPicture
                 \end{minipage}
                 }
                 \vskip-0.3cm
@@ -79,7 +88,7 @@
                 \begin{minipage}[t][1.1cm]{4.5cm}
                     \hspace*{\SigTransformX}
                     \vskip\SigTransformY
-                    \includegraphics[height=1.1cm]{\SigSource}
+                    \SigPicture
                 \end{minipage}
                 }
                 \vskip-0.3cm
