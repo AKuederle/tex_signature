@@ -61,21 +61,21 @@
         {full}{
             \begin{minipage}{6cm}
                 \begin{flushleft}
-                    \SigTopline \\
+                    \SigTopline \\ % create the topline
                 \end{flushleft}
-                \vspace*{-0.75cm}
-                \hspace*{1cm}
-                \begin{minipage}[t][1.1cm]{5cm}
-                    \vskip\SigTransformY
+                \vspace*{-0.75cm} % overlap between signature and topline
+                \hspace*{1cm} % default horizontal positioning of the signature
+                \begin{minipage}[t][1.1cm]{5cm} % inner minipage
+                    \vskip\SigTransformY % move the signature picture based on the values specified in the settings file
                     \hspace*{\SigTransformX}
-                    \SigPicture
+                    \SigPicture % insert the picture
                 \end{minipage}
-                \vskip-0.3cm
-                \rule{\textwidth}{0.2pt}
-                \vspace*{-0.7cm}
+                \vskip-0.3cm % overlap between minipage and rule
+                \rule{\textwidth}{0.2pt} % create signature rule
+                \vspace*{-0.7cm} % reduced space between rule and Name
                 \begin{flushright}
-                    \SigName
-                    \SigJobline
+                    \SigName % insert Name
+                    \SigJobline %insert Job
                 \end{flushright}
             \end{minipage}
         }
@@ -88,7 +88,7 @@
                     \SigPicture
                 \end{minipage}
                 \vskip-0.3cm
-                \makebox[\textwidth]{\dotfill}
+                \makebox[\textwidth]{\dotfill} % create dotted line
                 \vspace*{-0.7cm}
                 \begin{flushright}
                     \SigName
