@@ -41,11 +41,11 @@ The settings file must contain the following lines:
 \def\SigTransformY{-5px} % Length the signature is moved in Y direction from the default location
 ```
 
-The values of the different parameters can of course be changed! Regarding the the path to the picture, keep in mind how relative paths in Latex work.
+The values of the different parameters can of course be changed! Regarding the the path to the picture, keep in mind how relative paths inside packages are handeld in Latex.
 
 ```Latex
 .\folder\file % this is interpreted relative to Main file (probably not what you want in this case!)
-folder\file % this is interpreted relative to the file the input or include command is used in.
+folder\file % this is interpreted relative to the package file the input or include command is used in.
 ```
 
 To get the path to your picture right, specify it relative to the .sty file. So if you put the picture in the same folder as the settings-file, use: *signatures/pciturename.png*
