@@ -63,7 +63,7 @@ Optional import options are:
 An example import looks like this:
 
 ```latex
-\usepackage[siganture=mytestsignature, date=12.3.2014, nojob]{mysignature}
+\usepackage[signature=mytestsignature, date=12.3.2014, nojob]{mysignature}
 ```
 
 To create the signature use the ```\mysignature``` command inside your document. It takes one optional argument to specify the position and one mandatory argument to specify the style. Possible values for the position are: left, right, center. Available styles are *minimal* or *full*.
